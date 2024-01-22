@@ -1,6 +1,10 @@
 #ifndef Map_h
 #define Map_h
 
+#include <string>
+
+const int DEFAULT_MAX_ITEMS = 150;
+
 using KeyType = std::string;
 using ValueType = double;
 
@@ -59,6 +63,17 @@ class Map
 
     void swap(Map& other);
       // Exchange the contents of this map with the other one.
+  private:
+    struct Pair
+    {
+        KeyType   key;
+        ValueType value;
+    };
+    Pair map[DEFAULT_MAX_ITEMS];
+    int map_size;
+
+    int getIndex(const KeyType& key) const;
+      // gets index of key & returns -1 if not found
 };
 
 #endif // Map_h
