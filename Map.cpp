@@ -103,7 +103,22 @@ bool Map::get(int i, KeyType& key, ValueType& value) const
 
 void Map::swap(Map& other)
 {
-	std::swap(map, other.map);
+	int largest;
+	if (map_size > other.map_size)
+		largest = map_size;
+	else
+		largest = other.map_size;
+
+	for (int i = 0; i < largest; i++) {
+		Pair tmp = other.map[i];
+		other.map[i] = map[i];
+		map[i] = tmp;
+	}
+
+	int tmp;
+	tmp = other.map_size;
+	other.map_size = map_size;
+	map_size = tmp;
 }
 
 int Map::getIndex(const KeyType& key) const
