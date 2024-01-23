@@ -9,6 +9,9 @@ Map::Map()
 
 Map::Map(int items)
 {
+	if (items < 0)
+		items = DEFAULT_MAX_ITEMS;
+
 	map_size = 0;
 	map_cap = items;
 	map = new Pair[map_cap];
