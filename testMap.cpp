@@ -56,6 +56,24 @@ int main()
     assert(gpas.get(1, k, v)  &&  k == "Ethel");
     assert(gpas.get(0, k, v)  &&  k == "");
 
+    Map m3;
+    m3.insertOrUpdate("A", 1);
+    m3.insert("B", 2);
+    m3.insert("C", 3);
+    assert(m3.size() == 3 && m3.contains("A") && m3.contains("B")
+                         && m3.contains("C"));
+    m3.insertOrUpdate("D", 4);
+    m3.insertOrUpdate("A", 0);
+    assert(m3.size() == 4 && m3.contains("A") && m3.contains("B")
+                          && m3.contains("C") && m3.contains("D"));
+    k = "AAA";
+    v = 12121;
+    assert(m3.get(0, k, v) && k == "A" && v == 0);
+    assert(m3.get(3, k, v) && k == "D" && v == 4);
+    assert(m3.get("A", v) && v == 0);
+    assert(m3.get("D", v) && v == 4);
+    assert(!m3.erase("E") && m3.erase("B") && m3.size() == 3 && !m3.contains("B"));
+
     cout << "Passed all tests" << endl;
 }
 
